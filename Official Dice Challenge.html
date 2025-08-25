@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Dice Challenge</title>
+  </head>
+  <body>
+    
+    <div class="container"> <h1 class="gameStart">Let Start the Game</h1>
+      <div><button onclick="changeName()">Edit the names</button></div>
+    
+
+
+        <div class="dice">
+        <p class="name1">Player 1</p>
+        <img class ="img1" src = "images/dice6.png">
+        </div>
+        <p class="name2">Player 2</p>
+        <div class="dice">
+            <img  class ="img2" src = "images/dice6.png">
+
+        <div class="play"><button onclick="playGame()">Roll Dice</button></div>
+
+    </div>
+
+
+
+    <script>
+        function changeName(){
+            var playerName1=prompt("Please enter player 1 name: ")
+            document.querySelector(".name1").innerHTML = playerName1;
+           
+            
+            var playerName2=prompt("Please enter player2 name: ")
+            document.querySelector(".name2").innerHTML= playerName2;
+           
+        }
+
+        function playGame(){ 
+          var name1 = document.querySelector(".name1").textContent;
+          var name2 = document.querySelector(".name2").textContent;
+
+
+
+          diceNumber= ["1","2","3","4","5","6"];
+
+          chooseDice = Math.floor(Math.random()*diceNumber.length);
+          individualDice1 = diceNumber[chooseDice];
+
+          
+    
+          document.querySelector(".img1").src = `images/dice${individualDice1}.png`; 
+
+          diceNumber= ["1","2","3","4","5","6"];
+
+          chooseDice = Math.floor(Math.random()*diceNumber.length);
+          individualDice2 = diceNumber[chooseDice];
+
+         
+          document.querySelector(".img2").src = `images/dice${individualDice2}.png`; 
+        
+             
+            
+          if (Number(individualDice1) > Number(individualDice2) ) {
+            document.querySelector(".gameStart").innerHTML =  `${name1} wins!`;
+
+
+          } else if(Number(individualDice2 ) > Number(individualDice1)) {
+            document.querySelector(".gameStart").innerHTML = `${name2} Wins!`;
+          
+          } else{ 
+            document.querySelector(".gameStart").innerHTML = "Both is a Tie";
+          }
+
+
+        }
+
+
+      
+        
+
+          
+        
+
+          
+        
+      
+    
+
+          
+    </script>
+  </body>
+</html>

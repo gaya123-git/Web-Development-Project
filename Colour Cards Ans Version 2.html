@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Colour!</title>
+    <style>
+      .title {
+        text-align: center;
+        color: purple;
+      }
+      .box {
+        background-color: white;
+        width: 300px;
+        border: 10px solid black;
+        padding: 50px;
+        margin: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        line-height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Guess the colour</h1>
+    <div class="box">
+      Click button below to guess colour <br />
+      <button onclick="colourChange()">Guess Colour</button> <br /><br />
+      Press enter: <input type="text" id="userInput" />
+      <button onclick="handleSubmit()">Submit</button>
+      <p class="js-score"></p>
+      <button onclick="resetScore()">Reset Score</button>
+  
+    </div>
+
+   
+    <script>
+      let individualColour = "";
+      let score = JSON.parse(localStorage.getItem("score")) || { wins: 0 };
+      updateScore();
+
+      function colourChange() {
+        let colours = ["yellow", "pink", "red", "blue", "orange"];
+        let chooseColour = Math.floor(Math.random() * colours.length);
+        individualColour = colours[chooseColour];
+        document.querySelector(".box").style.backgroundColor = individualColour;
+      }
+
+      function handleSubmit() {
+        let guessColour = document
+          .querySelector("#userInput")
+          .value.trim()
+          .toLowerCase();
+        if (guessColour === individualColour) {
+          score.wins += 1;
+          localStorage.setItem("score", JSON.stringify(score)); // Save score
+          updateScore(); // Update displayed score
+        }
+      }
+
+      function resetScore() {
+        score.wins = 0;
+        localStorage.removeItem("score");
+        updateScore();
+      }
+
+      function updateScore() {
+        document.querySelector(".js-score").innerHTML = `Total Score: ${score.wins}`;
+      }
+    </script>
+  </body>
+</html>
